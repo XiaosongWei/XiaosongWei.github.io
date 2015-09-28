@@ -1,0 +1,61 @@
+<html>
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th {
+            wrap:hard;
+        }
+        th, td {
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crosswalk运行模式</h1>
+    <ul>
+        <li><strong>嵌入模式(Embedded Mode)：</strong>应用包含完整的Crosswalk引擎，体积较大</li>
+        <li><strong>共享模式(Shared Mode)：</strong>应用只包含Crosswalk的接口层，极大缩小了体积。但需要同时安装Crosswalk引擎的APK。首次启动时如果没有安装，会通过UI提示用户下载。</li>
+        <li><strong>静默下载模式(Download Mode)：</strong>此模式为试验性的，正在开发中。该模式与共享模式比较类似，区别在于用户不需要安装Crosswalk引擎APK，应用在首次启动时会在后台静默下载Crosswalk引擎APK并且从中解压出所需的库及资源文件，对用户没有影响。</li>
+    </ul>
+    
+    <h1>使用方法</h1>
+    <ul>
+        <li><strong>嵌入模式：</strong>链接<code>xwalk_core_library.aar</code>或者Crosswalk压缩包中的<code>xwalk_core_library</code>项目。代码请参考API文档中的<code>XWalkActivity</code>接口，或者使用<code>XWalkInitializer/XWalkUpdater</code>接口，其中<code>XWalkUpdater</code>请使用<code>updateXWalkRuntime()</code>。</li>
+        <li><strong>共享模式：</strong>链接<code>xwalk_shared_library.aar</code>或者Crosswalk压缩包中的<code>xwalk_shared_library</code>项目。共享模式代码和嵌入模式完全兼容，只要切换链接的库即可。</li>
+        <li><strong>静默下载模式：</strong>链接方式与共享模式相同。代码请参考API文档中的<code>XWalkInitializer/XWalkUpdater</code>接口，其中<code>XWalkUpdater</code>请使用有<code>XWalkBackgroundUpdateListener</code>的版本。</li>
+    </ul>
+    
+    <h1>下载</h1>
+    <h3>16.45.408.0 for ARM</h3>
+    <ul>
+        <li><a href="../download/16.45.408.0/crosswalk-16.zip">Crosswalk</a></li>
+        <li><a href="../download/16.45.408.0/XWalkRuntimeLib.apk">XWalkRuntimeLib(共享或静默下载模式使用)</a></li>
+        <li><a href="../download/16.45.408.0/xwalk_core_library.aar">Embedded Library AAR</a></li>
+        <li><a href="../download/16.45.408.0/xwalk_shared_library.aar">Shared Library AAR</a></li>
+    </ul>
+    
+    <h1>API</h1>
+    <ul>
+        <li><a href="../api/16/index.html">Crosswalk-16</a></li>
+    </ul>
+    
+    <h1>代码示例</h1>
+    <p><a href="https://github.com/lincsoon/XWalkTest">XWalkTest</a>启动后有一个列表，包含以下几个Activity示例</p>
+    <ul>
+        <li><strong>XWalkActivity：</strong>使用XWalkActivity接口，支持嵌入模式和共享模式</li>
+        <li><strong>XWalkInitializer：</strong>使用XWalkInitializer/XWalkUpdater接口，支持嵌入模式和共享模式</li>
+        <li><strong>XWalkDownload：</strong>使用XWalkInitializer/XWalkUpdater接口，支持嵌入模式和静默下载模式</li>
+        <li><strong>XWalkView：</strong>直接使用XWalkView接口，支持嵌入模式</li>
+        <li><strong>WebView：</strong>Android WebView示例</li>
+    </ul>
+
+    <h1>文档</h1>
+    <ul>
+        <li><a href="../docs/CrosswalkSharedMode.pdf">共享模式介绍(英文)</a></a></li>
+    </ul>
+</body>
+</html>
