@@ -24,9 +24,9 @@
     
     <h1>使用方法</h1>
     <ul>
-        <li><strong>嵌入模式：</strong>链接<code>xwalk_core_library.aar</code>或者Crosswalk压缩包中的<code>xwalk_core_library</code>项目。代码请参考API文档中的<code>XWalkActivity</code>接口，或者使用<code>XWalkInitializer/XWalkUpdater</code>接口，其中<code>XWalkUpdater</code>请使用<code>updateXWalkRuntime()</code>。</li>
+        <li><strong>嵌入模式：</strong>链接<code>xwalk_core_library.aar</code>或者Crosswalk压缩包中的<code>xwalk_core_library</code>项目。代码请参考API文档中的<code>XWalkActivity</code>接口，或者使用<code>XWalkInitializer/XWalkUpdater</code>接口。</li>
         <li><strong>共享模式：</strong>链接<code>xwalk_shared_library.aar</code>或者Crosswalk压缩包中的<code>xwalk_shared_library</code>项目。共享模式代码和嵌入模式完全兼容，只要切换链接的库即可。</li>
-        <li><strong>静默下载模式：</strong>链接方式与共享模式相同。代码请参考API文档中的<code>XWalkInitializer/XWalkUpdater</code>接口，其中<code>XWalkUpdater</code>请使用有<code>XWalkBackgroundUpdateListener</code>的版本。</li>
+        <li><strong>静默下载模式：</strong>链接方式与共享模式相同。代码请参考API文档中的<code>XWalkInitializer/XWalkUpdater</code>接口，其中<code>XWalkUpdater</code>请使用有<code>XWalkBackgroundUpdateListener</code>参数的版本。</li>
     </ul>
     
     <h1>下载</h1>
@@ -40,15 +40,15 @@
     
     <h1>API</h1>
     <ul>
-        <li><a href="../api/16/index.html">Crosswalk-16</a></li>
+        <li><a href="../docs/api/16/index.html">Crosswalk-16</a></li>
     </ul>
     
     <h1>代码示例</h1>
-    <p><a href="https://github.com/lincsoon/XWalkTest">XWalkTest</a>启动后有一个列表，包含以下几个Activity示例</p>
+    <p><a href="https://github.com/XiaosongWei/XWalkTest">XWalkTest</a>启动后有一个列表，包含以下几个Activity示例</p>
     <ul>
         <li><strong>XWalkActivity：</strong>使用XWalkActivity接口，支持嵌入模式和共享模式</li>
         <li><strong>XWalkInitializer：</strong>使用XWalkInitializer/XWalkUpdater接口，支持嵌入模式和共享模式</li>
-        <li><strong>XWalkDownload：</strong>使用XWalkInitializer/XWalkUpdater接口，支持嵌入模式和静默下载模式</li>
+        <li><strong>XWalkDownload：</strong>使用XWalkInitializer/XWalkUpdater接口，支持静默下载模式</li>
         <li><strong>XWalkView：</strong>直接使用XWalkView接口，支持嵌入模式</li>
         <li><strong>WebView：</strong>Android WebView示例</li>
     </ul>
