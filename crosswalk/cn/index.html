@@ -1,63 +1,189 @@
-<html>
-<head>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th {
-            wrap:hard;
-        }
-        th, td {
-            padding: 5px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <h1>Crosswalk运行模式</h1>
-    <ul>
-        <li><strong>嵌入模式(Embedded Mode)：</strong>应用包含完整的Crosswalk引擎，体积较大</li>
-        <li><strong>共享模式(Shared Mode)：</strong>应用只包含Crosswalk的接口层，极大缩小了体积。但需要同时安装Crosswalk引擎的APK。首次启动时如果没有安装，会通过UI提示用户下载。</li>
-        <li><strong>静默下载模式(Download Mode)：</strong>此模式为试验性的，正在开发中。该模式与共享模式比较类似，区别在于用户不需要安装Crosswalk引擎APK，应用在首次启动时会在后台静默下载Crosswalk引擎APK并且从中解压出所需的库及资源文件，对用户没有影响。</li>
-    </ul>
-    
-    <h1>使用方法</h1>
-    <ul>
-        <li><strong>嵌入模式：</strong>链接<code>xwalk_core_library.aar</code>或者Crosswalk压缩包中的<code>xwalk_core_library</code>项目。代码请参考API文档中的<code>XWalkActivity</code>接口，或者使用<code>XWalkInitializer/XWalkUpdater</code>接口。</li>
-        <li><strong>共享模式：</strong>链接<code>xwalk_shared_library.aar</code>或者Crosswalk压缩包中的<code>xwalk_shared_library</code>项目。共享模式代码和嵌入模式完全兼容，只要切换链接的库即可。</li>
-        <li><strong>静默下载模式：</strong>链接方式与共享模式相同。代码请参考API文档中的<code>XWalkInitializer/XWalkUpdater</code>接口，其中<code>XWalkUpdater</code>请使用有<code>XWalkBackgroundUpdateListener</code>参数的版本。</li>
-    </ul>
-    
-    <h1>下载</h1>
-    <h3><a href="https://github.com/XiaosongWei/crosswalk/tree/silent-download">Crosswalk源码</a></h3>
-    <h3>16.45.416.0 for ARM</h3>
-    <ul>
-        <li><a href="../download/16.45.416.0/crosswalk-16.zip">Crosswalk</a></li>
-        <li><a href="../download/16.45.416.0/XWalkRuntimeLib.apk">XWalkRuntimeLib(共享或静默下载模式使用)</a></li>
-        <li><a href="../download/16.45.416.0/xwalk_core_library.aar">Embedded Library AAR</a></li>
-        <li><a href="../download/16.45.416.0/xwalk_shared_library.aar">Shared Library AAR</a></li>
-    </ul>
-    
-    <h1>API</h1>
-    <ul>
-        <li><a href="../docs/api/16/index.html">Crosswalk-16</a></li>
-    </ul>
-    
-    <h1>代码示例</h1>
-    <p><a href="https://github.com/XiaosongWei/XWalkTest">XWalkTest</a>启动后有一个列表，包含以下几个Activity示例</p>
-    <ul>
-        <li><strong>XWalkActivity：</strong>使用XWalkActivity接口，支持嵌入模式和共享模式</li>
-        <li><strong>XWalkInitializer：</strong>使用XWalkInitializer/XWalkUpdater接口，支持嵌入模式和共享模式</li>
-        <li><strong>XWalkDownload：</strong>使用XWalkInitializer/XWalkUpdater接口，支持嵌入和静默下载模式</li>
-        <li><strong>XWalkView：</strong>直接使用XWalkView接口，支持嵌入模式</li>
-        <li><strong>WebView：</strong>Android WebView示例</li>
-    </ul>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  
+  <meta content="text/html; charset=gb18030" http-equiv="content-type">
+  <title>Crosswalk for Android</title>
 
-    <h1>文档</h1>
+  
+</head><body>
+<ul>
+
+  <li><span style="font-weight: bold;"></span><span style="font-weight: bold;">Crosswalk &#36816;&#34892;&#37096;&#32626;&#27169;&#24335;<br>
+    <br>
+    </span>&#19968;&#33324;&#24320;&#21457;&#32773;&#20250;&#25226;Crosswalk for
+Android&#24403;&#25104;&#19968;&#20010;&#23436;&#25972;&#30340;library&#38142;&#25509;&#21040;&#20182;&#33258;&#24049;&#30340;APP&#20013;&#65292;&#36825;&#26679;&#21487;&#20197;&#30830;&#20445;&#20182;&#33021;&#23436;&#25972;&#22320;&#25511;&#21046;&#25972;&#20010;Crosswalk
+Runtime&#30340;&#26356;&#26032;&#65292;&#20294;&#26159;&#30001;&#20110;Crosswalk&#20307;&#31215;&#36739;&#22823;&#65292;&#23548;&#33268;&#25972;&#20010;APP&#20307;&#31215;&#30456;&#24212;&#30340;&#21464;&#22823;&#65288;&#30456;&#27604;&#29992;Android
+WebView&#30340;&#24320;&#21457;&#25171;&#21253;&#26041;&#24335;&#65289;&#12290;&#20026;&#20102;&#35299;&#20915;&#36825;&#20010;&#38382;&#39064;&#65292;&#20849;&#20139;&#27169;&#24335;&#24212;&#36816;&#32780;&#29983;&#8212;&#8212;&#24320;&#21457;&#32773;&#30340;APP&#21482;&#38656;&#35201;&#38142;&#25509;Crosswalk&#30340;&#25509;&#21475;&#23618;&#65292;&#32780;Crosswalk
+Runtime&#30340;&#26680;&#24515;&#37096;&#20998;&#34987;&#25171;&#21253;&#25104;&#19968;&#20010;&#29420;&#31435;&#30340;APK&#65292;Crosswalk&#25509;&#21475;&#23618;&#36890;&#36807;&#21453;&#23556;&#30340;&#26041;&#24335;&#21435;&#35775;&#38382;&#20381;&#23384;&#20110;&#21478;&#22806;&#19968;&#20010;APK&#37324;&#30340;Crosswalk
+Runtime&#12290;&#20197;&#36825;&#31181;&#26041;&#24335;&#37096;&#32626;&#65292;&#21487;&#20197;&#20445;&#35777;&#24320;&#21457;&#32773;&#30340;APP&#20307;&#31215;&#19981;&#20250;&#22240;&#20026;Crosswalk&#32780;&#26174;&#33879;&#22686;&#21152;&#65292;&#22312;APP&#31532;&#19968;&#27425;&#34987;&#36816;&#34892;&#30340;&#26102;&#20505;&#65292;&#22914;&#26524;&#24403;&#21069;&#35774;&#22791;&#19978;&#27809;&#26377;&#23433;
+&#35013;Crosswalk Runtime APK&#65292;APP&#20250;&#25552;&#31034;&#29992;&#25143;&#21435;&#19979;&#36733;&#24182;&#23433;&#35013;Crosswalk Runtime
+APK&#12290;&#22810;&#20010;APP&#20849;&#20139;&#19968;&#20010;Crosswalk Runtime APK&#65292;&#34429;&#28982;APP&#20307;&#31215;&#20943;&#23567;&#20102;&#65292;&#20294;&#26159;&#24320;&#21457;&#32773;&#26080;&#27861;&#25511;&#21046;Crosswalk
+Runtime
+APK&#30340;&#26356;&#26032;&#12290;&#32780;&#19979;&#36733;&#27169;&#24335;&#26159;&#19968;&#31181;&#20860;&#20855;&#23884;&#20837;&#27169;&#24335;&#21644;&#20849;&#20139;&#27169;&#24335;&#20248;&#28857;&#30340;&#37096;&#32626;&#27169;&#24335;&#8212;&#8212;&#24320;&#21457;&#32773;&#30340;APP&#21482;&#38656;&#38142;&#25509;Crosswalk&#25509;&#21475;&#23618;&#65292;APP&#39318;&#27425;&#21551;&#21160;&#20250;&#22312;&#21518;&#21488;&#19979;&#36733;
+Crosswalk Runtime APK&#24182;&#20174;&#20013;&#35299;&#21387;&#20986;&#25152;&#38656;&#35201;&#30340;&#24211;&#21644;&#36164;&#28304;&#25991;&#20214;&#65292;&#26080;&#38656;&#23433;&#35013;&#22240;&#32780;&#23545;&#29992;&#25143;&#27809;&#26377;&#24433;&#21709;&#12290;&#19979;&#36733;&#27169;&#24335;&#19979;&#30340;Crosswalk
+Runtime APK&#26159;&#26080;&#27861;&#22810;&#20010;APP&#20849;&#20139;&#30340;&#65292;&#35299;&#21387;&#20986;&#26469;&#30340;&#24211;&#21644;&#36164;&#28304;&#25991;&#20214;&#23384;&#25918;&#22312;APP&#30340;&#20869;&#37096;&#23384;&#20648;&#31354;&#38388;&#20869;&#65292;&#24320;&#21457;&#32773;&#21487;&#25511;&#21046;Crosswalk
+Runtime&#30340;&#26356;&#26032;&#12290;<br>
+    <br>
     <ul>
-        <li><a href="../docs/CrosswalkSharedMode.pdf">共享模式介绍(英文)</a></a></li>
+      <li><span style="font-weight: bold;">&#23884;&#20837;&#27169;&#24335; &#65288;Embedded Mode&#65289;</span><br>
+<br>
+        <span style="text-decoration: underline;">&#21253;&#21547;&#23436;&#25972;&#30340;Crosswalk
+Runtime&#65292;&#20307;&#31215;&#36739;&#22823;&#65292;&#24320;&#21457;&#32773;&#21487;&#25511;&#21046;Crosswalk Runtime&#30340;&#26356;&#26032;</span><br>
+        <br>
+        <span style="font-weight: bold;">&#20351;&#29992;&#26041;&#24335;</span>&#65306;&#38142;&#25509;
+xwalk_core_library.aar&#25110;&#32773;Crosswalk&#21387;&#32553;&#21253;&#20013;&#30340;xwalk_core_library&#39033;&#30446;&#12290;&#20195;&#30721;&#35831;&#21442;&#32771;API&#25991;&#26723;&#20013;&#30340;
+XWalkActivity&#25509;&#21475;&#65292;&#25110;&#32773;XWalkInitializer/XWalkUpdater&#25509;&#21475;<br>
+        <br>
+      </li>
+      <li><span style="font-weight: bold;">&#20849;&#20139;&#27169;&#24335; &#65288;Shared Mode&#65289;</span><br>
+<br>
+        <span style="text-decoration: underline;">&#20165;&#21253;&#21547;Crosswalk&#25509;&#21475;&#23618;&#65292;&#20307;&#31215;&#36739;&#23567;&#65292;&#38656;
+&#35201;&#35774;&#22791;&#19978;&#23433;&#35013;&#26377;Crosswalk Runtime APK&#65292;&#39318;&#27425;&#36816;&#34892;&#21487;&#33021;&#20250;&#25552;&#31034;&#29992;&#25143;&#21435;&#19979;&#36733;&#24182;&#23433;&#35013;Runtime
+APK&#65292;&#22810;&#20010;APP&#20849;&#20139;&#65292;&#24320;&#21457;&#32773;&#26080;&#27861;&#25511;
+&#21046; Crosswalk Runtime&#30340;&#26356;&#26032;</span><br>
+        <br>
+        <span style="font-weight: bold;">&#20351;&#29992;&#26041;&#24335;</span>&#65306;&#38142;&#25509;
+xwalk_shared_library.aar&#25110;&#32773;Crosswalk&#21387;&#32553;&#21253;&#20013;&#30340;xwalk_shared_library&#39033;&#30446;&#12290;&#20849;&#20139;&#27169;&#24335;&#21644;&#23884;&#20837;&#27169;&#24335;
+&#23436;&#20840;&#20860;&#23481;&#65292;&#21482;&#38656;&#20999;&#25442;&#38142;&#25509;&#25152;&#38656;&#30340;&#24211;&#21363;&#21487;&#12290;<br>
+        <br style="font-weight: bold;">
+      </li>
+      <li><span style="font-weight: bold;">&#19979;&#36733;&#27169;&#24335; &#65288;Download Mode&#65289;</span><br>
+<br>
+        <span style="text-decoration: underline;">&#20165;&#21253;&#21547;Crosswalk&#25509;&#21475;&#23618;&#65292;&#20307;&#31215;&#36739;&#23567;&#65292;&#39318;
+&#27425;&#36816;&#34892;&#20250;&#22312;&#21518;&#21488;&#19979;&#36733;Crosswalk Runtime APK&#24182;&#20174;&#20013;&#35299;&#21387;&#20986;&#25152;&#38656;&#30340;&#24211;&#21644;&#36164;&#28304;&#25991;&#20214;&#65292;&#26080;&#38656;&#29992;&#25143;&#24178;&#39044;&#65292;&#24320;&#21457;&#32773;&#21487;&#25511;&#21046;Crosswalk
+Runtime&#30340;&#26356;&#26032;</span><br>
+        <br>
+&#20351;&#29992;&#26041;&#24335;&#65306;&#38142;&#25509;xwalk_shared_library.aar&#25110;&#32773;Crosswalk&#21387;&#32553;&#21253;&#20013;&#30340;xwalk_shared_library&#39033;&#30446;&#12290;&#30456;&#27604;
+&#20849;&#20139;&#27169;&#24335;&#65292;&#20195;&#30721;&#20165;&#38656;&#20570;&#23569;&#37327;&#26356;&#25913;&#65292;&#35814;&#35265;API&#25991;&#26723;&#20013;&#30340;XWalkActivity&#25509;&#21475;&#65292;&#25110;&#32773;XWalkInitializer/XWalkUpdater&#25509;
+&#21475;&#12290;</li>
     </ul>
-    <p><a href="crosswalk.html">Crosswalk for Android</a></p>
-</body>
-</html>
+    <br style="font-weight: bold;">
+  </li>
+  <li style="font-weight: bold;">Crosswalk &#19979;&#36733;&#27169;&#24335;<br>
+    <br>
+&#65288;&#27491;&#22312;&#24320;&#21457;&#24403;&#20013;...&#65292;&#27426;&#36814;&#25552;&#20379;&#24847;&#35265;&#21450;&#24314;&#35758;&#65281; xiaosong.wei@intel.com&#65289;<br>
+<br>
+    <ul>
+      <li><span style="font-weight: normal;"><span style="font-weight: bold;">&#22522;&#26412;&#24037;&#20316;&#21407;&#29702;</span><br>
+<br>
+&#24320;&#21457;&#32773;&#38656;&#35201;&#33258;&#24049;&#25552;&#20379;Crosswalk Runtime APK&#30340;&#19979;&#36733;&#26381;&#21153;&#65292;&#36890;&#36807;&#22312;AndroidManifest.xml&#20013;&#25351;&#23450;meta-data:<br>
+        </span>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <pre style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: 'DejaVu Sans Mono'; font-size: 9pt; font-weight: normal;">&lt;<span style="color: rgb(0, 0, 128);">meta-data </span><span style="color: rgb(102, 14, 122);">android</span><span style="color: rgb(0, 0, 255);">:name=</span><span style="color: rgb(0, 128, 0);">"xwalk_apk_url" </span><span style="color: rgb(102, 14, 122);">android</span><span style="color: rgb(0, 0, 255);">:value=</span><span style="color: rgb(0, 128, 0);">"http://10.0.2.2/XWalkRuntimeLib.apk" </span>/&gt;</pre>
+        <span style="font-weight: normal;">APP&#39318;&#27425;&#21551;&#21160;&#26102;&#20250;&#26816;&#26597;&#24403;&#21069;&#26159;&#21542;&#26377;&#24050;&#32463;&#19979;&#36733;&#22909;&#30340;
+Crosswalk
+Runtime&#21487;&#29992;&#65292;&#22914;&#26524;&#27809;&#26377;&#65292;Crosswalk&#30340;&#25509;&#21475;&#23618;&#20250;&#23581;&#35797;&#20174;xwalk_apk_url&#25351;&#23450;&#30340;URL&#21435;&#19979;&#36733;Crosswalk Runtime
+APK&#12290;&#19979;&#36733;&#23436;&#25104;&#21518;&#20250;&#23545;APK&#20570;&#19968;&#20010;&#31614;&#21517;&#39564;&#35777;&#65292;&#30446;&#21069;&#21482;&#25903;&#25345;&#20351;&#29992;Chromium Debug Key&#21644;Intel Private
+Key&#31614;&#21517;&#30340;Crosswalk Runtime
+APK&#12290;&#31614;&#21517;&#39564;&#35777;&#36890;&#36807;&#21518;&#20250;&#25226;Runtime&#26680;&#24515;&#30340;&#24211;&#21450;&#36164;&#28304;&#25991;&#20214;&#35299;&#21387;&#20986;&#24182;&#25918;&#32622;&#21040;APP&#30340;&#20869;&#37096;&#23384;&#20648;&#31354;&#38388;&#12290;Crosswalk&#25509;&#21475;&#23618;&#36890;&#36807;
+DexClassLoader&#21152;&#36733;Runtime&#30340;&#31867;&#25991;&#20214;&#24182;&#36890;&#36807;&#21453;&#23556;&#26426;&#21046;&#20351;&#29992;Runtime&#25552;&#20379;&#30340;API&#12290;<br>
+        </span><br>
+      </li>
+      <li><span style="font-weight: normal;"><span style="font-weight: bold;">Crosswalk Runtime APK&#22312;&#26381;&#21153;&#22120;&#31471;&#30340;&#37096;&#32626;</span><br>
+<br>
+&#20026;&#20102;&#25903;&#25345;&#22810;&#20010;CPU&#20307;&#31995;&#32467;&#26500;&#65292;&#26381;&#21153;&#31471;&#38656;&#35201;&#25552;&#20379;&#38024;&#23545;&#19981;&#21516;CPU&#20307;&#31995;&#32467;&#26500;&#30340;Crosswalk Runtime
+APK&#19979;&#36733;&#12290;Crosswalk&#25509;&#21475;&#23618;&#22312;&#35831;&#27714;&#19979;&#36733;&#26102;&#65292;&#20250;&#22312;URL&#21518;&#38468;&#21152;&#19978;"?arch=CPU_ABI"&#65292;&#21746;&#29702;&#30340;CPU_ABI&#31561;&#20110;<br>
+x86, armeabi-v7a, x86_64, arm64-v8a&#12290;&#26381;&#21153;&#22120;&#31471;&#21487;&#26681;&#25454;&#19981;&#21516;&#30340;CPU_ABI&#21457;&#36865;&#22238;&#30456;&#24212;&#30340;Crosswalk
+Runtime APK&#12290;<br>
+        <br>
+        </span></li>
+      <li><span style="font-weight: normal;"><span style="font-weight: bold;">Crosswalk Runtime&#26356;&#26032;</span><br>
+<br>
+Crosswalk&#20869;&#37096;&#19981;&#20250;&#23545;Crosswalk Runtime&#36827;&#34892;&#33258;&#21160;&#26356;&#26032;&#65292;&#24320;&#21457;&#32773;&#38656;&#35201;&#33258;&#34892;&#20915;&#23450;&#20309;&#26102;&#22914;&#20309;&#36827;&#34892;Crosswalk
+Runtime&#30340;&#33258;&#21160;&#26356;&#26032;&#12290;APP&#22312;&#20915;&#23450;&#23545;Crosswalk
+Runtime&#36827;&#34892;&#26356;&#26032;&#26102;&#65292;&#22312;&#35843;&#29992;Crosswalk&#30340;&#20219;&#20309;API&#20043;&#21069;&#65292;&#20808;&#35843;&#29992;
+        <code>XWalkUpdater.resetXWalkRuntimeForUpdate()</code>&#36827;&#34892;&#26356;&#26032;&#21069;&#30340;&#20934;&#22791;&#65292;&#23454;
+&#38469;&#19978;&#65292;&#36825;&#20010;&#26041;&#27861;&#20250;&#25226;&#20043;&#21069;&#19979;&#36733;&#22909;&#30340;Crosswalk Runtime&#24211;&#21450;&#36164;&#28304;&#21024;&#38500;&#25481;&#20197;&#20351;&#24471;&#22312;&#25509;&#19979;&#26469;&#30340;Crosswalk&#21021;&#22987;&#21270;&#20013;&#37325;&#26032;&#19979;&#36733;Runtime
+APK&#12290;<br>
+        <br>
+        </span></li>
+      <li><span style="font-weight: normal;"><span style="font-weight: bold;">LZMA&#21387;&#32553;&#29256;&#30340;Crosswalk Runtime
+APK</span><br>
+<br>
+&#19981;&#23569;&#24320;&#21457;&#32773;&#21453;&#24212;Crosswalk Runtime APK&#20307;&#31215;&#22826;&#22823;&#65292;&#20110;&#26159;&#25105;&#20204;&#38024;&#23545;&#19979;&#36733;&#27169;&#24335;&#20351;&#29992;&#30340;APK&#29992;LZMA&#36827;&#34892;&#21387;&#32553;&#65292;&#20197;&#19979;&#26159;&#24403;&#21069;&#29256;&#26412;&#30340;&#19968;&#20010;&#25968;&#25454;&#23545;
+&#27604;<br>
+        </span>
+        <table style="text-align: left; width: 430px; height: 88px; font-weight: bold;" border="1" cellpadding="2" cellspacing="2">
+          <tbody>
+            <tr>
+              <td style="vertical-align: top; font-weight: normal; text-align: center;">ARCH<br>
+              </td>
+              <td style="vertical-align: top; font-weight: normal; text-align: center;">Original
+XWalkRuntimeLib.apk<br>
+              </td>
+              <td style="vertical-align: top; font-weight: normal; text-align: center;">LZMA
+compressed XWalkRuntimeLibLzma.apk<br>
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top; font-weight: normal; text-align: center;">X86<br>
+              </td>
+              <td style="vertical-align: top; font-weight: normal; text-align: center;">28M<br>
+              </td>
+              <td style="vertical-align: top; font-weight: normal; text-align: center;">18M<br>
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top; font-weight: normal; text-align: center;">ARM<br>
+              </td>
+              <td style="vertical-align: top; font-weight: normal; text-align: center;">25M<br>
+              </td>
+              <td style="vertical-align: top; font-weight: normal; text-align: center;">15M<br>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br><span style="font-weight: normal;">
+&#22312;&#39318;&#27425;&#36816;&#34892;&#26102;&#65292;Crosswalk&#25509;&#21475;&#23618;&#20250;&#23545;&#21387;&#32553;&#36807;&#30340;&#24211;&#21644;&#36164;&#28304;&#25991;&#20214;&#36827;&#34892;LZMA&#35299;&#21387;&#12290;&#19979;&#36733;&#27169;&#24335;&#20013;&#65292;&#25105;&#20204;&#21516;&#26102;&#25903;&#25345;&#36825;&#20004;&#31181;&#24418;&#24335;&#30340;Runtime APK&#65292;&#24320;
+&#21457;&#32773;&#21487;&#26681;&#25454;&#38656;&#35201;&#33258;&#34892;&#37096;&#32626;&#25152;&#38656;&#29256;&#26412;&#12290;</span><br>
+<br>
+        </li>
+    </ul>
+  </li>
+  <li style="font-weight: bold;">Crosswalk &#19979;&#36733;<br>
+    <br>
+    <ul>
+      <li><span style="font-weight: normal;"><a href="https://github.com/XiaosongWei/crosswalk/tree/silent-download-7z">Crosswalk&#28304;&#30721;</a><br>
+        <br>
+        </span></li>
+      <li><span style="font-weight: normal;">ARM&#29256;&#26412;&#65288;&#22522;&#20110;16.45.416.0&#65289;<br>
+        </span>
+        <ul>
+          <li><a href="../download/16.45.416.0/crosswalk-16.zip"><span style="font-weight: normal;">Crosswalk</span></a></li>
+          <li><a href="../download/16.45.416.0/XWalkRuntimeLib.apk"><span style="font-weight: normal;">XWalkRuntimeLib.apk</span></a></li>
+          <li><a href="../download/16.45.416.0/XWalkRuntimeLibLzma.apk"><span style="font-weight: normal;">XWalkRuntimeLibLzma.apk</span></a></li>
+          <li><a href="../download/16.45.416.0/xwalk_core_library.aar"><span style="font-weight: normal;">xwalk_core_library.aar</span></a></li>
+          <li><a href="../download/16.45.416.0/xwalk_shared_library.aar"><span style="font-weight: normal;">xwalk_shared_library.aar</span></a></li>
+        </ul>
+        <span style="font-weight: normal;"><br>
+        </span></li>
+    </ul>
+</li>
+  <li style="font-weight: bold;">API&#25991;&#26723;<br>
+    <br>
+    <a href="../docs/api/16/index.html"><span style="font-weight: normal;">Crosswalk-16</span></a><br>
+    <br>
+  </li>
+  <li style="font-weight: bold;">&#20195;&#30721;&#31034;&#20363;<br>
+    <br>
+    <span style="font-weight: normal;"><a href="https://github.com/XiaosongWei/XWalkTest">XWalkTest</a>&#21551;&#21160;&#21518;&#20250;&#26377;&#19968;&#20010;&#21015;&#34920;&#65292;&#21253;&#21547;&#20197;&#19979;&#20960;&#20010;Activity&#31034;&#20363;&#65306;</span><br>
+    <ul style="font-weight: normal;">
+      <li>XWalkActivity&#65306;&#20351;&#29992;XWalkActivity&#25509;&#21475;&#65292;&#25903;&#25345;&#23884;&#20837;&#27169;&#24335;&#21644;&#20849;&#20139;&#27169;&#24335;</li>
+      <li>XWalkInitializer&#65306;&#20351;&#29992;XWalkInitializer&#25509;&#21475;&#65292;&#25903;&#25345;&#23884;&#20837;&#27169;&#24335;&#21644;&#20849;&#20139;&#27169;&#24335;</li>
+      <li>XWalkDownload&#65306;&#20351;&#29992;XWalkInitializer/XWalkUpdater&#25509;&#21475;&#65292;&#25903;&#25345;&#19979;&#36733;&#27169;&#24335;</li>
+      <li>XWalkView&#65306;&#30452;&#25509;&#20351;&#29992;XWalkView&#25509;&#21475;&#65292;&#25903;&#25345;&#23884;&#20837;&#27169;&#24335;</li>
+      <li>WebView&#65306;Android WebView&#31034;&#20363;</li>
+    </ul>
+    <br>
+  </li>
+  <li style="font-weight: bold;">FAQ<br>
+    <br>
+  </li>
+  <li style="font-weight: bold;">&#21442;&#32771;&#25991;&#26723;<br>
+    <br>
+    <a href="../docs/CrosswalkSharedMode.pdf"><span style="font-weight: normal;">&#20849;&#20139;&#27169;&#24335;&#20171;&#32461;(&#33521;&#25991;)</span></a><br>
+  </li>
+
+</ul>
+
+</body></html>
