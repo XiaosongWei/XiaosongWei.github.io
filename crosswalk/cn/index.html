@@ -1,107 +1,108 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
-  
-  <meta content="text/html; charset=gb18030" http-equiv="content-type">
-  <title>Crosswalk for Android</title>
+
 
   
-</head><body>
+  <meta content="text/html; charset=gb18030" http-equiv="content-type"><title>Crosswalk for Android</title>
+  
+
+  
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></head><body>
 <ul>
 
-  <li><span style="font-weight: bold;"></span><span style="font-weight: bold;">Crosswalk &#36816;&#34892;&#37096;&#32626;&#27169;&#24335;<br>
+  <li><span style="font-weight: bold;"></span><span style="font-weight: bold;">Crosswalk 运行部署模式<br>
     <br>
-    </span>&#19968;&#33324;&#24320;&#21457;&#32773;&#20250;&#25226;Crosswalk for
-Android&#24403;&#25104;&#19968;&#20010;&#23436;&#25972;&#30340;library&#38142;&#25509;&#21040;&#20182;&#33258;&#24049;&#30340;APP&#20013;&#65292;&#36825;&#26679;&#21487;&#20197;&#30830;&#20445;&#20182;&#33021;&#23436;&#25972;&#22320;&#25511;&#21046;&#25972;&#20010;Crosswalk
-Runtime&#30340;&#26356;&#26032;&#65292;&#20294;&#26159;&#30001;&#20110;Crosswalk&#20307;&#31215;&#36739;&#22823;&#65292;&#23548;&#33268;&#25972;&#20010;APP&#20307;&#31215;&#30456;&#24212;&#30340;&#21464;&#22823;&#65288;&#30456;&#27604;&#29992;Android
-WebView&#30340;&#24320;&#21457;&#25171;&#21253;&#26041;&#24335;&#65289;&#12290;&#20026;&#20102;&#35299;&#20915;&#36825;&#20010;&#38382;&#39064;&#65292;&#20849;&#20139;&#27169;&#24335;&#24212;&#36816;&#32780;&#29983;&#8212;&#8212;&#24320;&#21457;&#32773;&#30340;APP&#21482;&#38656;&#35201;&#38142;&#25509;Crosswalk&#30340;&#25509;&#21475;&#23618;&#65292;&#32780;Crosswalk
-Runtime&#30340;&#26680;&#24515;&#37096;&#20998;&#34987;&#25171;&#21253;&#25104;&#19968;&#20010;&#29420;&#31435;&#30340;APK&#65292;Crosswalk&#25509;&#21475;&#23618;&#36890;&#36807;&#21453;&#23556;&#30340;&#26041;&#24335;&#21435;&#35775;&#38382;&#20381;&#23384;&#20110;&#21478;&#22806;&#19968;&#20010;APK&#37324;&#30340;Crosswalk
-Runtime&#12290;&#20197;&#36825;&#31181;&#26041;&#24335;&#37096;&#32626;&#65292;&#21487;&#20197;&#20445;&#35777;&#24320;&#21457;&#32773;&#30340;APP&#20307;&#31215;&#19981;&#20250;&#22240;&#20026;Crosswalk&#32780;&#26174;&#33879;&#22686;&#21152;&#65292;&#22312;APP&#31532;&#19968;&#27425;&#34987;&#36816;&#34892;&#30340;&#26102;&#20505;&#65292;&#22914;&#26524;&#24403;&#21069;&#35774;&#22791;&#19978;&#27809;&#26377;&#23433;
-&#35013;Crosswalk Runtime APK&#65292;APP&#20250;&#25552;&#31034;&#29992;&#25143;&#21435;&#19979;&#36733;&#24182;&#23433;&#35013;Crosswalk Runtime
-APK&#12290;&#22810;&#20010;APP&#20849;&#20139;&#19968;&#20010;Crosswalk Runtime APK&#65292;&#34429;&#28982;APP&#20307;&#31215;&#20943;&#23567;&#20102;&#65292;&#20294;&#26159;&#24320;&#21457;&#32773;&#26080;&#27861;&#25511;&#21046;Crosswalk
+    </span>一般开发者会把Crosswalk for
+Android当成一个完整的library链接到他自己的APP中，这样可以确保他能完整地控制整个Crosswalk
+Runtime的更新，但是由于Crosswalk体积较大，导致整个APP体积相应的变大（相比用Android
+WebView的开发打包方式）。为了解决这个问题，共享模式应运而生——开发者的APP只需要链接Crosswalk的接口层，而Crosswalk
+Runtime的核心部分被打包成一个独立的APK，Crosswalk接口层通过反射的方式去访问依存于另外一个APK里的Crosswalk
+Runtime。以这种方式部署，可以保证开发者的APP体积不会因为Crosswalk而显著增加，在APP第一次被运行的时候，如果当前设备上没有安
+装Crosswalk Runtime APK，APP会提示用户去下载并安装Crosswalk Runtime
+APK。多个APP共享一个Crosswalk Runtime APK，虽然APP体积减小了，但是开发者无法控制Crosswalk
 Runtime
-APK&#30340;&#26356;&#26032;&#12290;&#32780;&#19979;&#36733;&#27169;&#24335;&#26159;&#19968;&#31181;&#20860;&#20855;&#23884;&#20837;&#27169;&#24335;&#21644;&#20849;&#20139;&#27169;&#24335;&#20248;&#28857;&#30340;&#37096;&#32626;&#27169;&#24335;&#8212;&#8212;&#24320;&#21457;&#32773;&#30340;APP&#21482;&#38656;&#38142;&#25509;Crosswalk&#25509;&#21475;&#23618;&#65292;APP&#39318;&#27425;&#21551;&#21160;&#20250;&#22312;&#21518;&#21488;&#19979;&#36733;
-Crosswalk Runtime APK&#24182;&#20174;&#20013;&#35299;&#21387;&#20986;&#25152;&#38656;&#35201;&#30340;&#24211;&#21644;&#36164;&#28304;&#25991;&#20214;&#65292;&#26080;&#38656;&#23433;&#35013;&#22240;&#32780;&#23545;&#29992;&#25143;&#27809;&#26377;&#24433;&#21709;&#12290;&#19979;&#36733;&#27169;&#24335;&#19979;&#30340;Crosswalk
-Runtime APK&#26159;&#26080;&#27861;&#22810;&#20010;APP&#20849;&#20139;&#30340;&#65292;&#35299;&#21387;&#20986;&#26469;&#30340;&#24211;&#21644;&#36164;&#28304;&#25991;&#20214;&#23384;&#25918;&#22312;APP&#30340;&#20869;&#37096;&#23384;&#20648;&#31354;&#38388;&#20869;&#65292;&#24320;&#21457;&#32773;&#21487;&#25511;&#21046;Crosswalk
-Runtime&#30340;&#26356;&#26032;&#12290;<br>
+APK的更新。而下载模式是一种兼具嵌入模式和共享模式优点的部署模式——开发者的APP只需链接Crosswalk接口层，APP首次启动会在后台下载
+Crosswalk Runtime APK并从中解压出所需要的库和资源文件，无需安装因而对用户没有影响。下载模式下的Crosswalk
+Runtime APK是无法多个APP共享的，解压出来的库和资源文件存放在APP的内部存储空间内，开发者可控制Crosswalk
+Runtime的更新。<br>
     <br>
     <ul>
-      <li><span style="font-weight: bold;">&#23884;&#20837;&#27169;&#24335; &#65288;Embedded Mode&#65289;</span><br>
+      <li><span style="font-weight: bold;">嵌入模式 （Embedded Mode）</span><br>
 <br>
-        <span style="text-decoration: underline;">&#21253;&#21547;&#23436;&#25972;&#30340;Crosswalk
-Runtime&#65292;&#20307;&#31215;&#36739;&#22823;&#65292;&#24320;&#21457;&#32773;&#21487;&#25511;&#21046;Crosswalk Runtime&#30340;&#26356;&#26032;</span><br>
+        <span style="text-decoration: underline;">包含完整的Crosswalk
+Runtime，体积较大，开发者可控制Crosswalk Runtime的更新</span><br>
         <br>
-        <span style="font-weight: bold;">&#20351;&#29992;&#26041;&#24335;</span>&#65306;&#38142;&#25509;
-xwalk_core_library.aar&#25110;&#32773;Crosswalk&#21387;&#32553;&#21253;&#20013;&#30340;xwalk_core_library&#39033;&#30446;&#12290;&#20195;&#30721;&#35831;&#21442;&#32771;API&#25991;&#26723;&#20013;&#30340;
-XWalkActivity&#25509;&#21475;&#65292;&#25110;&#32773;XWalkInitializer/XWalkUpdater&#25509;&#21475;<br>
+        <span style="font-weight: bold;">使用方式</span>：链接
+xwalk_core_library.aar或者Crosswalk压缩包中的xwalk_core_library项目。代码请参考API文档中的
+XWalkActivity接口，或者XWalkInitializer/XWalkUpdater接口<br>
         <br>
       </li>
-      <li><span style="font-weight: bold;">&#20849;&#20139;&#27169;&#24335; &#65288;Shared Mode&#65289;</span><br>
+      <li><span style="font-weight: bold;">共享模式 （Shared Mode）</span><br>
 <br>
-        <span style="text-decoration: underline;">&#20165;&#21253;&#21547;Crosswalk&#25509;&#21475;&#23618;&#65292;&#20307;&#31215;&#36739;&#23567;&#65292;&#38656;
-&#35201;&#35774;&#22791;&#19978;&#23433;&#35013;&#26377;Crosswalk Runtime APK&#65292;&#39318;&#27425;&#36816;&#34892;&#21487;&#33021;&#20250;&#25552;&#31034;&#29992;&#25143;&#21435;&#19979;&#36733;&#24182;&#23433;&#35013;Runtime
-APK&#65292;&#22810;&#20010;APP&#20849;&#20139;&#65292;&#24320;&#21457;&#32773;&#26080;&#27861;&#25511;
-&#21046; Crosswalk Runtime&#30340;&#26356;&#26032;</span><br>
+        <span style="text-decoration: underline;">仅包含Crosswalk接口层，体积较小，需
+要设备上安装有Crosswalk Runtime APK，首次运行可能会提示用户去下载并安装Runtime
+APK，多个APP共享，开发者无法控
+制 Crosswalk Runtime的更新</span><br>
         <br>
-        <span style="font-weight: bold;">&#20351;&#29992;&#26041;&#24335;</span>&#65306;&#38142;&#25509;
-xwalk_shared_library.aar&#25110;&#32773;Crosswalk&#21387;&#32553;&#21253;&#20013;&#30340;xwalk_shared_library&#39033;&#30446;&#12290;&#20849;&#20139;&#27169;&#24335;&#21644;&#23884;&#20837;&#27169;&#24335;
-&#23436;&#20840;&#20860;&#23481;&#65292;&#21482;&#38656;&#20999;&#25442;&#38142;&#25509;&#25152;&#38656;&#30340;&#24211;&#21363;&#21487;&#12290;<br>
+        <span style="font-weight: bold;">使用方式</span>：链接
+xwalk_shared_library.aar或者Crosswalk压缩包中的xwalk_shared_library项目。共享模式和嵌入模式
+完全兼容，只需切换链接所需的库即可。<br>
         <br style="font-weight: bold;">
       </li>
-      <li><span style="font-weight: bold;">&#19979;&#36733;&#27169;&#24335; &#65288;Download Mode&#65289;</span><br>
+      <li><span style="font-weight: bold;">下载模式 （Download Mode）</span><br>
 <br>
-        <span style="text-decoration: underline;">&#20165;&#21253;&#21547;Crosswalk&#25509;&#21475;&#23618;&#65292;&#20307;&#31215;&#36739;&#23567;&#65292;&#39318;
-&#27425;&#36816;&#34892;&#20250;&#22312;&#21518;&#21488;&#19979;&#36733;Crosswalk Runtime APK&#24182;&#20174;&#20013;&#35299;&#21387;&#20986;&#25152;&#38656;&#30340;&#24211;&#21644;&#36164;&#28304;&#25991;&#20214;&#65292;&#26080;&#38656;&#29992;&#25143;&#24178;&#39044;&#65292;&#24320;&#21457;&#32773;&#21487;&#25511;&#21046;Crosswalk
-Runtime&#30340;&#26356;&#26032;</span><br>
+        <span style="text-decoration: underline;">仅包含Crosswalk接口层，体积较小，首
+次运行会在后台下载Crosswalk Runtime APK并从中解压出所需的库和资源文件，无需用户干预，开发者可控制Crosswalk
+Runtime的更新</span><br>
         <br>
-&#20351;&#29992;&#26041;&#24335;&#65306;&#38142;&#25509;xwalk_shared_library.aar&#25110;&#32773;Crosswalk&#21387;&#32553;&#21253;&#20013;&#30340;xwalk_shared_library&#39033;&#30446;&#12290;&#30456;&#27604;
-&#20849;&#20139;&#27169;&#24335;&#65292;&#20195;&#30721;&#20165;&#38656;&#20570;&#23569;&#37327;&#26356;&#25913;&#65292;&#35814;&#35265;API&#25991;&#26723;&#20013;&#30340;XWalkActivity&#25509;&#21475;&#65292;&#25110;&#32773;XWalkInitializer/XWalkUpdater&#25509;
-&#21475;&#12290;</li>
+使用方式：链接xwalk_shared_library.aar或者Crosswalk压缩包中的xwalk_shared_library项目。相比
+共享模式，代码仅需做少量更改，详见API文档中的XWalkActivity接口，或者XWalkInitializer/XWalkUpdater接
+口。</li>
     </ul>
     <br style="font-weight: bold;">
   </li>
-  <li style="font-weight: bold;">Crosswalk &#19979;&#36733;&#27169;&#24335;<br>
-    <br>
-&#65288;&#27491;&#22312;&#24320;&#21457;&#24403;&#20013;...&#65292;&#27426;&#36814;&#25552;&#20379;&#24847;&#35265;&#21450;&#24314;&#35758;&#65281; xiaosong.wei@intel.com&#65289;<br>
+  <li style="font-weight: bold;">Crosswalk 下载模式<br>
 <br>
     <ul>
-      <li><span style="font-weight: normal;"><span style="font-weight: bold;">&#22522;&#26412;&#24037;&#20316;&#21407;&#29702;</span><br>
+      
+      <li><span style="font-weight: normal;"><span style="font-weight: bold;">基本工作原理</span><br>
 <br>
-&#24320;&#21457;&#32773;&#38656;&#35201;&#33258;&#24049;&#25552;&#20379;Crosswalk Runtime APK&#30340;&#19979;&#36733;&#26381;&#21153;&#65292;&#36890;&#36807;&#22312;AndroidManifest.xml&#20013;&#25351;&#23450;meta-data:<br>
+开发者需要自己提供Crosswalk Runtime APK的下载服务，通过在AndroidManifest.xml中指定meta-data:<br>
         </span>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <pre style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: 'DejaVu Sans Mono'; font-size: 9pt; font-weight: normal;">&lt;<span style="color: rgb(0, 0, 128);">meta-data </span><span style="color: rgb(102, 14, 122);">android</span><span style="color: rgb(0, 0, 255);">:name=</span><span style="color: rgb(0, 128, 0);">"xwalk_apk_url" </span><span style="color: rgb(102, 14, 122);">android</span><span style="color: rgb(0, 0, 255);">:value=</span><span style="color: rgb(0, 128, 0);">"http://10.0.2.2/XWalkRuntimeLib.apk" </span>/&gt;</pre>
-        <span style="font-weight: normal;">APP&#39318;&#27425;&#21551;&#21160;&#26102;&#20250;&#26816;&#26597;&#24403;&#21069;&#26159;&#21542;&#26377;&#24050;&#32463;&#19979;&#36733;&#22909;&#30340;
+        
+        <pre style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: 'DejaVu Sans Mono'; font-size: 9pt; font-weight: normal;">指定Runtime APK的下载地址：<br>&lt;<span style="color: rgb(0, 0, 128);">meta-data </span><span style="color: rgb(102, 14, 122);">android</span><span style="color: rgb(0, 0, 255);">:name=</span><span style="color: rgb(0, 128, 0);">"xwalk_apk_url" </span><span style="color: rgb(102, 14, 122);">android</span><span style="color: rgb(0, 0, 255);">:value=</span><span style="color: rgb(0, 128, 0);">"http://10.0.2.2/XWalkRuntimeLib.apk" </span>/&gt;<br>指定enable download mode：<br>&lt;<span style="color: rgb(0, 0, 128);">meta-data </span><span style="color: rgb(102, 14, 122);">android</span><span style="color: rgb(0, 0, 255);">:name=</span><span style="color: rgb(0, 128, 0);">"xwalk_enable_download_mode" </span><span style="color: rgb(102, 14, 122);">android</span><span style="color: rgb(0, 0, 255);">:value=</span><span style="color: rgb(0, 128, 0);">"enable" </span>/&gt;<br><br>如果想要静默下载，取消通知栏的下载提示，需要添加：<br>&lt;uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" /&gt;<br></pre>
+        <span style="font-weight: normal;">APP首次启动时会检查当前是否有已经下载好的
 Crosswalk
-Runtime&#21487;&#29992;&#65292;&#22914;&#26524;&#27809;&#26377;&#65292;Crosswalk&#30340;&#25509;&#21475;&#23618;&#20250;&#23581;&#35797;&#20174;xwalk_apk_url&#25351;&#23450;&#30340;URL&#21435;&#19979;&#36733;Crosswalk Runtime
-APK&#12290;&#19979;&#36733;&#23436;&#25104;&#21518;&#20250;&#23545;APK&#20570;&#19968;&#20010;&#31614;&#21517;&#39564;&#35777;&#65292;&#30446;&#21069;&#21482;&#25903;&#25345;&#20351;&#29992;Chromium Debug Key&#21644;Intel Private
-Key&#31614;&#21517;&#30340;Crosswalk Runtime
-APK&#12290;&#31614;&#21517;&#39564;&#35777;&#36890;&#36807;&#21518;&#20250;&#25226;Runtime&#26680;&#24515;&#30340;&#24211;&#21450;&#36164;&#28304;&#25991;&#20214;&#35299;&#21387;&#20986;&#24182;&#25918;&#32622;&#21040;APP&#30340;&#20869;&#37096;&#23384;&#20648;&#31354;&#38388;&#12290;Crosswalk&#25509;&#21475;&#23618;&#36890;&#36807;
-DexClassLoader&#21152;&#36733;Runtime&#30340;&#31867;&#25991;&#20214;&#24182;&#36890;&#36807;&#21453;&#23556;&#26426;&#21046;&#20351;&#29992;Runtime&#25552;&#20379;&#30340;API&#12290;<br>
+Runtime可用，如果没有，Crosswalk的接口层会尝试从xwalk_apk_url指定的URL去下载Crosswalk Runtime
+APK。下载完成后会对APK做一个签名验证，目前要求Crosswalk Runtime APK和App APK使用同一个Key进行签名。开发者可以通过添加meta-data取消签名验证：<br>
+        </span>
+        <pre style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: 'DejaVu Sans Mono'; font-size: 9pt; font-weight: normal;">&lt;<span style="color: rgb(0, 0, 128);">meta-data </span><span style="color: rgb(102, 14, 122);">android</span><span style="color: rgb(0, 0, 255);">:name=</span><span style="color: rgb(0, 128, 0);">"xwalk_verify" </span><span style="color: rgb(102, 14, 122);">android</span><span style="color: rgb(0, 0, 255);">:value=</span><span style="color: rgb(0, 128, 0);">"disable" </span>/&gt;</pre>
+        <span style="font-weight: normal;">签名验证通过后会把Runtime核心的库及资源文件解压出并放置到APP的内部存储空间。Crosswalk接口层通过
+DexClassLoader加载Runtime的类文件并通过反射机制使用Runtime提供的API。<br>
         </span><br>
       </li>
-      <li><span style="font-weight: normal;"><span style="font-weight: bold;">Crosswalk Runtime APK&#22312;&#26381;&#21153;&#22120;&#31471;&#30340;&#37096;&#32626;</span><br>
+
+      <li><span style="font-weight: normal;"><span style="font-weight: bold;">Crosswalk Runtime APK在服务器端的部署</span><br>
 <br>
-&#20026;&#20102;&#25903;&#25345;&#22810;&#20010;CPU&#20307;&#31995;&#32467;&#26500;&#65292;&#26381;&#21153;&#31471;&#38656;&#35201;&#25552;&#20379;&#38024;&#23545;&#19981;&#21516;CPU&#20307;&#31995;&#32467;&#26500;&#30340;Crosswalk Runtime
-APK&#19979;&#36733;&#12290;Crosswalk&#25509;&#21475;&#23618;&#22312;&#35831;&#27714;&#19979;&#36733;&#26102;&#65292;&#20250;&#22312;URL&#21518;&#38468;&#21152;&#19978;"?arch=CPU_ABI"&#65292;&#21746;&#29702;&#30340;CPU_ABI&#31561;&#20110;<br>
-x86, armeabi-v7a, x86_64, arm64-v8a&#12290;&#26381;&#21153;&#22120;&#31471;&#21487;&#26681;&#25454;&#19981;&#21516;&#30340;CPU_ABI&#21457;&#36865;&#22238;&#30456;&#24212;&#30340;Crosswalk
-Runtime APK&#12290;<br>
+为了支持多个CPU体系结构，服务端需要提供针对不同CPU体系结构的Crosswalk Runtime
+APK下载。Crosswalk接口层在请求下载时，会在URL后附加上"?arch=CPU_ABI"，这里的CPU_ABI等于<br>
+x86, armeabi-v7a, x86_64, arm64-v8a。服务器端可根据不同的CPU_ABI发送回相应的Crosswalk
+Runtime APK。<br>
         <br>
         </span></li>
-      <li><span style="font-weight: normal;"><span style="font-weight: bold;">Crosswalk Runtime&#26356;&#26032;</span><br>
-<br>
-Crosswalk&#20869;&#37096;&#19981;&#20250;&#23545;Crosswalk Runtime&#36827;&#34892;&#33258;&#21160;&#26356;&#26032;&#65292;&#24320;&#21457;&#32773;&#38656;&#35201;&#33258;&#34892;&#20915;&#23450;&#20309;&#26102;&#22914;&#20309;&#36827;&#34892;Crosswalk
-Runtime&#30340;&#33258;&#21160;&#26356;&#26032;&#12290;APP&#22312;&#20915;&#23450;&#23545;Crosswalk
-Runtime&#36827;&#34892;&#26356;&#26032;&#26102;&#65292;&#22312;&#35843;&#29992;Crosswalk&#30340;&#20219;&#20309;API&#20043;&#21069;&#65292;&#20808;&#35843;&#29992;
-        <code>XWalkUpdater.resetXWalkRuntimeForUpdate()</code>&#36827;&#34892;&#26356;&#26032;&#21069;&#30340;&#20934;&#22791;&#65292;&#23454;
-&#38469;&#19978;&#65292;&#36825;&#20010;&#26041;&#27861;&#20250;&#25226;&#20043;&#21069;&#19979;&#36733;&#22909;&#30340;Crosswalk Runtime&#24211;&#21450;&#36164;&#28304;&#21024;&#38500;&#25481;&#20197;&#20351;&#24471;&#22312;&#25509;&#19979;&#26469;&#30340;Crosswalk&#21021;&#22987;&#21270;&#20013;&#37325;&#26032;&#19979;&#36733;Runtime
-APK&#12290;<br>
+      <li><span style="font-weight: normal;"><span style="font-weight: bold;">Crosswalk Runtime自动更新</span><br>
+<br>目前我们要求用于App打包链接的Crosswalk接口层与Crosswalk Runtime
+APK必须是同一个build的版本，如果在运行时发现Crosswalk接口层与Crosswalk Runtime
+APK不是来源于同一个build，那么会触发一个Crosswalk Runtime
+APK的重新下载更新。这个机制可以确保开发者的App使用新版本打包发布后，用户设备上的App可以自动升级相应的Crosswalk
+Runtime。如果开发者不想使用这种默认的更新机制，可以在初始化之前调用 XWalkUpdater.setAutoUpdate(false).<br>
         <br>
         </span></li>
-      <li><span style="font-weight: normal;"><span style="font-weight: bold;">LZMA&#21387;&#32553;&#29256;&#30340;Crosswalk Runtime
+      <li><span style="font-weight: normal;"><span style="font-weight: bold;">LZMA压缩版的Crosswalk Runtime
 APK</span><br>
 <br>
-&#19981;&#23569;&#24320;&#21457;&#32773;&#21453;&#24212;Crosswalk Runtime APK&#20307;&#31215;&#22826;&#22823;&#65292;&#20110;&#26159;&#25105;&#20204;&#38024;&#23545;&#19979;&#36733;&#27169;&#24335;&#20351;&#29992;&#30340;APK&#29992;LZMA&#36827;&#34892;&#21387;&#32553;&#65292;&#20197;&#19979;&#26159;&#24403;&#21069;&#29256;&#26412;&#30340;&#19968;&#20010;&#25968;&#25454;&#23545;
-&#27604;<br>
+不少开发者反应Crosswalk Runtime APK体积太大，于是我们针对下载模式使用的APK用LZMA进行压缩，以下是当前版本的一个数据对
+比<br>
         </span>
         <table style="text-align: left; width: 430px; height: 88px; font-weight: bold;" border="1" cellpadding="2" cellspacing="2">
           <tbody>
@@ -134,54 +135,37 @@ compressed XWalkRuntimeLibLzma.apk<br>
           </tbody>
         </table>
         <br><span style="font-weight: normal;">
-&#22312;&#39318;&#27425;&#36816;&#34892;&#26102;&#65292;Crosswalk&#25509;&#21475;&#23618;&#20250;&#23545;&#21387;&#32553;&#36807;&#30340;&#24211;&#21644;&#36164;&#28304;&#25991;&#20214;&#36827;&#34892;LZMA&#35299;&#21387;&#12290;&#19979;&#36733;&#27169;&#24335;&#20013;&#65292;&#25105;&#20204;&#21516;&#26102;&#25903;&#25345;&#36825;&#20004;&#31181;&#24418;&#24335;&#30340;Runtime APK&#65292;&#24320;
-&#21457;&#32773;&#21487;&#26681;&#25454;&#38656;&#35201;&#33258;&#34892;&#37096;&#32626;&#25152;&#38656;&#29256;&#26412;&#12290;</span><br>
+在首次运行时，Crosswalk接口层会对压缩过的库和资源文件进行LZMA解压。下载模式中，我们同时支持这两种形式的Runtime APK，开
+发者可根据需要自行部署所需版本。</span><br>
 <br>
         </li>
     </ul>
   </li>
-  <li style="font-weight: bold;">Crosswalk &#19979;&#36733;<br>
-    <br>
-    <ul>
-      <li><span style="font-weight: normal;"><a href="https://github.com/XiaosongWei/crosswalk/tree/silent-download-7z">Crosswalk&#28304;&#30721;</a><br>
-        <br>
-        </span></li>
-      <li><span style="font-weight: normal;">ARM&#29256;&#26412;&#65288;&#22522;&#20110;16.45.416.0&#65289;<br>
-        </span>
-        <ul>
-          <li><a href="../download/16.45.416.0/crosswalk-16.zip"><span style="font-weight: normal;">Crosswalk</span></a></li>
-          <li><a href="../download/16.45.416.0/XWalkRuntimeLib.apk"><span style="font-weight: normal;">XWalkRuntimeLib.apk</span></a></li>
-          <li><a href="../download/16.45.416.0/XWalkRuntimeLibLzma.apk"><span style="font-weight: normal;">XWalkRuntimeLibLzma.apk</span></a></li>
-          <li><a href="../download/16.45.416.0/xwalk_core_library.aar"><span style="font-weight: normal;">xwalk_core_library.aar</span></a></li>
-          <li><a href="../download/16.45.416.0/xwalk_shared_library.aar"><span style="font-weight: normal;">xwalk_shared_library.aar</span></a></li>
-        </ul>
-        <span style="font-weight: normal;"><br>
-        </span></li>
-    </ul>
-</li>
-  <li style="font-weight: bold;">API&#25991;&#26723;<br>
-    <br>
-    <a href="../docs/api/16/index.html"><span style="font-weight: normal;">Crosswalk-16</span></a><br>
-    <br>
+  
+  <li style="font-weight: bold;">Crosswalk 下载<br>
+    <span style="font-weight: normal;">自17.46.448.0起，Crosswalk正式支持下载模式，开发者可从</span><a style="font-weight: normal;" href="https://download.01.org/crosswalk/releases/crosswalk/android/canary">这里</a><span style="font-weight: normal;">下载</span><br>
+<br>
+    <ul></ul>
+    
   </li>
-  <li style="font-weight: bold;">&#20195;&#30721;&#31034;&#20363;<br>
+  <li style="font-weight: bold;">代码示例<br>
     <br>
-    <span style="font-weight: normal;"><a href="https://github.com/XiaosongWei/XWalkTest">XWalkTest</a>&#21551;&#21160;&#21518;&#20250;&#26377;&#19968;&#20010;&#21015;&#34920;&#65292;&#21253;&#21547;&#20197;&#19979;&#20960;&#20010;Activity&#31034;&#20363;&#65306;</span><br>
+    <span style="font-weight: normal;"><a href="https://github.com/XiaosongWei/XWalkTest">XWalkTest</a>启动后会有一个列表，包含以下几个Activity示例：</span><br>
     <ul style="font-weight: normal;">
-      <li>XWalkActivity&#65306;&#20351;&#29992;XWalkActivity&#25509;&#21475;&#65292;&#25903;&#25345;&#23884;&#20837;&#27169;&#24335;&#21644;&#20849;&#20139;&#27169;&#24335;</li>
-      <li>XWalkInitializer&#65306;&#20351;&#29992;XWalkInitializer&#25509;&#21475;&#65292;&#25903;&#25345;&#23884;&#20837;&#27169;&#24335;&#21644;&#20849;&#20139;&#27169;&#24335;</li>
-      <li>XWalkDownload&#65306;&#20351;&#29992;XWalkInitializer/XWalkUpdater&#25509;&#21475;&#65292;&#25903;&#25345;&#19979;&#36733;&#27169;&#24335;</li>
-      <li>XWalkView&#65306;&#30452;&#25509;&#20351;&#29992;XWalkView&#25509;&#21475;&#65292;&#25903;&#25345;&#23884;&#20837;&#27169;&#24335;</li>
-      <li>WebView&#65306;Android WebView&#31034;&#20363;</li>
+      <li>XWalkActivity：使用XWalkActivity接口，支持嵌入模式和共享模式</li>
+      <li>XWalkInitializer：使用XWalkInitializer接口，支持嵌入模式和共享模式</li>
+      <li>XWalkDownload：使用XWalkInitializer/XWalkUpdater接口，支持下载模式</li>
+      <li>XWalkView：直接使用XWalkView接口，支持嵌入模式</li>
+      <li>WebView：Android WebView示例</li>
     </ul>
     <br>
   </li>
   <li style="font-weight: bold;">FAQ<br>
     <br>
   </li>
-  <li style="font-weight: bold;">&#21442;&#32771;&#25991;&#26723;<br>
+  <li style="font-weight: bold;">参考文档<br>
     <br>
-    <a href="../docs/CrosswalkSharedMode.pdf"><span style="font-weight: normal;">&#20849;&#20139;&#27169;&#24335;&#20171;&#32461;(&#33521;&#25991;)</span></a><br>
+    <a href="../docs/CrosswalkSharedMode.pdf"><span style="font-weight: normal;">共享模式介绍(英文)</span></a><br>
   </li>
 
 </ul>
